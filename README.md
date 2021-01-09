@@ -57,7 +57,20 @@ where (select t2.MedicalInsuranceID from PersonalData t2 where t2.ID==t3.Persona
 ```
 ### Задача G. Сотрудники ИТ-отдела
 ```
-
+CREATE VIEW ShowITEmployees AS
+WITH RECURSIVE bosses AS (
+SELECT e.ID, FullName, p.Title as Position, e.ChiefID
+FROM Employees e
+INNER JOIN Positions p on e.PositionID = p.ID
+WHERE p.Title = 'PC Principal'
+UNION
+SELECT e2.ID, e2.FullName, p.Title as Position, e2.ChiefID
+FROM Employees e1
+INNER JOIN Employees e2 on e1.ID = e2.ChiefID
+LEFT JOIN Positions p on e2.PositionID = p.ID
+INNER JOIN bosses b on b.id = e2.ChiefID
+)
+SELECT * FROM bosses;
 ```
 ### Задача H. Создание таблицы с заметками
 ```
@@ -94,7 +107,22 @@ SELECT FirstName
 ```
 ### Задача L. Остатки товаров на складе
 ```
-
+SELECT Products.Title, Categories.Name AS CategoryName, Products.SellingPrice
+FROM Products
+         LEFT JOIN Categories ON Products.CategoryID = Categories.ID
+         JOIN (
+    SELECT *
+    FROM (
+             SELECT SalesItems.ProductID soldID, sum(SalesItems.QuantitySold) sumSold
+             FROM SalesItems
+             GROUP BY SalesItems.ProductID)
+             JOIN (
+        SELECT PurchaseItems.ProductID purchaseID, sum(PurchaseItems.QuantityBought) sumBought
+        FROM PurchaseItems
+        GROUP BY PurchaseItems.ProductID)
+                  ON purchaseID = soldID AND sumBought = sumSold)
+              ON purchaseID = Products.ID
+ORDER BY Products.SellingPrice DESC;
 ```
 ### Задача M. Опытные сотрудники
 ```
