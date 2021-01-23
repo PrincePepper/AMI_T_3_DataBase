@@ -1,4 +1,22 @@
-# решение контеста « SQL Б8119.01.03.02систпро»  
+# AMI_T_3_DateBase
+Предмет «Базы данных» 
+
+Иcпользуется язык программирования SQL, все запросы написана на `SQLite3`.
+
+### Страница задач контеста «SQL Б8119.01.03.02систпро» [CLICK](https://imcs.dvfu.ru/cats/?f=problems;cid=5073727)
+
+Преподователи курса:  
+       [Малявин Никита](https://github.com/FooBarrior)
+
+***The project was released for my University course***
+
+##### My contacts:
+1. [Telegram](https://tgmsg.ru/princepepper)
+2. [Вконтакте](https://vk.com/princepepper)
+3. [Instargam](https://www.instagram.com/prince_pepper_official/?hl=ru)
+4. <sereda.wk@gmail.com>
+
+### Решение данного контеста
 ### Задача 1. Агрегатные функции
 ```
 SELECT MIN(value) AS MinValue,
@@ -94,10 +112,6 @@ contact_id INTEGER REFERENCES contacts (id));
 CREATE TABLE phones (number TEXT,
 contact_id INTEGER REFERENCES contacts (id));
 ```
-### Задача J. Прогресс обработки заявок
-```
-
-```
 ### Задача K. Поиск клиентов по первой букве
 ```
 SELECT FirstName 
@@ -169,10 +183,6 @@ SELECT *,
        CASE WHEN Value > 0 THEN 'positive' WHEN Value < 0 THEN 'negative' ELSE 'zero' END Classification
   FROM Numbers;
 ```
-### Задача S. Инциденты тех. поддержки
-```
-
-```
 ### Задача T. Занятые парковочные места
 ```
 SELECT CarNumber as CarNumber,ParkingNumber as ParkingNumber from Cars t1, CarsParkings t2,ParkingPlaces t3 where t1.ID==t2.CarID and t2.ParkingID==t3.ID
@@ -198,8 +208,4 @@ select ID, SecondName from Clients
 ### Задача Y. Выборка всех полей
 ```
 select * from SomeTable
-```
-### Задача Z. Восстановление списка файлов
-```
-
 ```
